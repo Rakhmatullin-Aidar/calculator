@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: TextInputType.number,
       onChanged: onChanged,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(

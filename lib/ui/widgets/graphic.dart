@@ -18,12 +18,14 @@ class BarChartGraphic extends StatefulWidget {
 class _BarChartGraphicState extends State<BarChartGraphic> {
   late double amount;
   late double totalAmount;
+  double width = 0;
 
   @override
   void initState() {
     super.initState();
-    amount = double.parse(widget.calculation.amount);
-    totalAmount = double.parse(widget.calculation.totalAmount);
+    amount = widget.calculation.amount;
+    totalAmount = widget.calculation.totalAmount;
+    width = 50 * widget.calculation.term.toDouble();
   }
 
   Widget leftTitles(double value, TitleMeta meta) {
@@ -58,7 +60,7 @@ class _BarChartGraphicState extends State<BarChartGraphic> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Container(
-                width: (30 * double.parse(widget.calculation.term)),
+                width: width,
                 constraints: BoxConstraints(
                   minWidth: MediaQuery.of(context).size.width,
                 ),
@@ -118,10 +120,10 @@ class _BarChartGraphicState extends State<BarChartGraphic> {
 
   List<BarChartGroupData> getData(double barsWidth, double barsSpace) {
     List<BarChartGroupData> list = [];
-    for (int i = 0; i < double.parse(widget.calculation.term); i++) {
+    for (int i = 0; i < widget.calculation.term; i++) {
       if (widget.calculation.paymentType == 'Аннуитетный') {
-        amount += amount * double.parse(widget.calculation.percent) / 100 -
-            double.parse(widget.calculation.monthlyPayment);
+        amount += amount * widget.calculation.percent / 100 -
+            widget.calculation.monthlyPayment;
 
         list.add(
           BarChartGroupData(
@@ -129,7 +131,7 @@ class _BarChartGraphicState extends State<BarChartGraphic> {
             barsSpace: barsSpace,
             barRods: [
               BarChartRodData(
-                toY: double.parse(widget.calculation.amount) + double.parse(widget.calculation.monthlyPayment),
+                toY: widget.calculation.amount + widget.calculation.monthlyPayment,
                 rodStackItems: [
                   BarChartRodStackItem(
                     0,
@@ -138,7 +140,7 @@ class _BarChartGraphicState extends State<BarChartGraphic> {
                   ),
                   BarChartRodStackItem(
                     amount,
-                    amount + double.parse(widget.calculation.monthlyPayment),
+                    amount + widget.calculation.monthlyPayment,
                     Colors.greenAccent,
                   ),
                 ],
@@ -151,7 +153,7 @@ class _BarChartGraphicState extends State<BarChartGraphic> {
         );
       } else {
         totalAmount =
-            totalAmount - double.parse(widget.calculation.monthlyPayment);
+            totalAmount - widget.calculation.monthlyPayment;
 
         list.add(
           BarChartGroupData(
@@ -159,7 +161,7 @@ class _BarChartGraphicState extends State<BarChartGraphic> {
             barsSpace: barsSpace,
             barRods: [
               BarChartRodData(
-                toY: double.parse(widget.calculation.totalAmount),
+                toY: widget.calculation.totalAmount,
                 rodStackItems: [
                   BarChartRodStackItem(
                     0,
@@ -169,7 +171,7 @@ class _BarChartGraphicState extends State<BarChartGraphic> {
                   BarChartRodStackItem(
                     totalAmount,
                     totalAmount +
-                        double.parse(widget.calculation.monthlyPayment),
+                        widget.calculation.monthlyPayment,
                     Colors.greenAccent,
                   ),
                 ],

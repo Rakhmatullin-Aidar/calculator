@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
 
+enum PaymentType { annuity, differentiated}
+
 class HomeState extends Equatable {
   final String amount;
   final String percent;
   final String term;
-  final String paymentType;
+  final PaymentType paymentType;
 
   final String monthlyPayment;
   final String totalAmount;
@@ -14,7 +16,7 @@ class HomeState extends Equatable {
     this.amount = '',
     this.percent = '',
     this.term = '',
-    this.paymentType = 'Аннуитетный',
+    this.paymentType = PaymentType.annuity,
     this.monthlyPayment = '',
     this.totalAmount = '',
     this.overpayment = '',
@@ -24,7 +26,7 @@ class HomeState extends Equatable {
     String? amount,
     String? percent,
     String? term,
-    String? paymentType,
+    PaymentType? paymentType,
     String? monthlyPayment,
     String? totalAmount,
     String? overpayment,

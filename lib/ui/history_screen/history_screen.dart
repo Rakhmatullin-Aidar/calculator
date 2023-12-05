@@ -1,6 +1,7 @@
 import 'package:calculator/data/models/calculation/calculation_model.dart';
 import 'package:calculator/data/shared_service/shared_service.dart';
 import 'package:calculator/ui/history_screen/bloc/history_cubit.dart';
+import 'package:calculator/ui/home_screen/bloc/home_state.dart';
 import 'package:calculator/ui/widgets/graphic.dart';
 import 'package:calculator/ui/widgets/hat.dart';
 import 'package:flutter/material.dart';
@@ -114,7 +115,7 @@ class _Item extends StatelessWidget {
                   const Expanded(
                     child: Text('Сумма кредита:'),
                   ),
-                  Text(calculation.amount),
+                  Text('${calculation.amount}'),
                 ],
               ),
               Row(
@@ -123,7 +124,7 @@ class _Item extends StatelessWidget {
                   const Expanded(
                     child: Text('Процент:'),
                   ),
-                  Text(calculation.percent),
+                  Text('${calculation.percent}'),
                 ],
               ),
               Row(
@@ -132,7 +133,7 @@ class _Item extends StatelessWidget {
                   const Expanded(
                     child: Text('Срок:'),
                   ),
-                  Text(calculation.term),
+                  Text('${calculation.term}'),
                 ],
               ),
               Row(
@@ -141,7 +142,11 @@ class _Item extends StatelessWidget {
                   const Expanded(
                     child: Text('Тип кредита:'),
                   ),
-                  Text(calculation.paymentType),
+                  Text(
+                    calculation.paymentType == PaymentType.annuity
+                        ? 'Аннуитетный'
+                        : 'Дифференцированный',
+                  ),
                 ],
               ),
               Row(
@@ -150,7 +155,7 @@ class _Item extends StatelessWidget {
                   const Expanded(
                     child: Text('Ежемесячный платеж:'),
                   ),
-                  Text(calculation.monthlyPayment),
+                  Text('${calculation.monthlyPayment}'),
                 ],
               ),
               Row(
@@ -159,7 +164,7 @@ class _Item extends StatelessWidget {
                   const Expanded(
                     child: Text('Общая сумма:'),
                   ),
-                  Text(calculation.totalAmount),
+                  Text('${calculation.totalAmount}'),
                 ],
               ),
               Row(
@@ -168,7 +173,7 @@ class _Item extends StatelessWidget {
                   const Expanded(
                     child: Text('Переплата:'),
                   ),
-                  Text(calculation.overpayment),
+                  Text('${calculation.overpayment}'),
                 ],
               ),
             ],

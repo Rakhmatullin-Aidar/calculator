@@ -20,13 +20,13 @@ Calculation _$CalculationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Calculation {
-  String get amount => throw _privateConstructorUsedError;
-  String get percent => throw _privateConstructorUsedError;
-  String get term => throw _privateConstructorUsedError;
-  String get paymentType => throw _privateConstructorUsedError;
-  String get monthlyPayment => throw _privateConstructorUsedError;
-  String get totalAmount => throw _privateConstructorUsedError;
-  String get overpayment => throw _privateConstructorUsedError;
+  double get amount => throw _privateConstructorUsedError;
+  double get percent => throw _privateConstructorUsedError;
+  int get term => throw _privateConstructorUsedError;
+  PaymentType get paymentType => throw _privateConstructorUsedError;
+  double get monthlyPayment => throw _privateConstructorUsedError;
+  double get totalAmount => throw _privateConstructorUsedError;
+  double get overpayment => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,13 +41,13 @@ abstract class $CalculationCopyWith<$Res> {
       _$CalculationCopyWithImpl<$Res, Calculation>;
   @useResult
   $Res call(
-      {String amount,
-      String percent,
-      String term,
-      String paymentType,
-      String monthlyPayment,
-      String totalAmount,
-      String overpayment});
+      {double amount,
+      double percent,
+      int term,
+      PaymentType paymentType,
+      double monthlyPayment,
+      double totalAmount,
+      double overpayment});
 }
 
 /// @nodoc
@@ -75,31 +75,31 @@ class _$CalculationCopyWithImpl<$Res, $Val extends Calculation>
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       percent: null == percent
           ? _value.percent
           : percent // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       term: null == term
           ? _value.term
           : term // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       paymentType: null == paymentType
           ? _value.paymentType
           : paymentType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentType,
       monthlyPayment: null == monthlyPayment
           ? _value.monthlyPayment
           : monthlyPayment // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       totalAmount: null == totalAmount
           ? _value.totalAmount
           : totalAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       overpayment: null == overpayment
           ? _value.overpayment
           : overpayment // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
     ) as $Val);
   }
 }
@@ -113,13 +113,13 @@ abstract class _$$CalculationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String amount,
-      String percent,
-      String term,
-      String paymentType,
-      String monthlyPayment,
-      String totalAmount,
-      String overpayment});
+      {double amount,
+      double percent,
+      int term,
+      PaymentType paymentType,
+      double monthlyPayment,
+      double totalAmount,
+      double overpayment});
 }
 
 /// @nodoc
@@ -145,31 +145,31 @@ class __$$CalculationImplCopyWithImpl<$Res>
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       percent: null == percent
           ? _value.percent
           : percent // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       term: null == term
           ? _value.term
           : term // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       paymentType: null == paymentType
           ? _value.paymentType
           : paymentType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentType,
       monthlyPayment: null == monthlyPayment
           ? _value.monthlyPayment
           : monthlyPayment // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       totalAmount: null == totalAmount
           ? _value.totalAmount
           : totalAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       overpayment: null == overpayment
           ? _value.overpayment
           : overpayment // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
     ));
   }
 }
@@ -190,19 +190,19 @@ class _$CalculationImpl implements _Calculation {
       _$$CalculationImplFromJson(json);
 
   @override
-  final String amount;
+  final double amount;
   @override
-  final String percent;
+  final double percent;
   @override
-  final String term;
+  final int term;
   @override
-  final String paymentType;
+  final PaymentType paymentType;
   @override
-  final String monthlyPayment;
+  final double monthlyPayment;
   @override
-  final String totalAmount;
+  final double totalAmount;
   @override
-  final String overpayment;
+  final double overpayment;
 
   @override
   String toString() {
@@ -248,31 +248,31 @@ class _$CalculationImpl implements _Calculation {
 
 abstract class _Calculation implements Calculation {
   const factory _Calculation(
-      {required final String amount,
-      required final String percent,
-      required final String term,
-      required final String paymentType,
-      required final String monthlyPayment,
-      required final String totalAmount,
-      required final String overpayment}) = _$CalculationImpl;
+      {required final double amount,
+      required final double percent,
+      required final int term,
+      required final PaymentType paymentType,
+      required final double monthlyPayment,
+      required final double totalAmount,
+      required final double overpayment}) = _$CalculationImpl;
 
   factory _Calculation.fromJson(Map<String, dynamic> json) =
       _$CalculationImpl.fromJson;
 
   @override
-  String get amount;
+  double get amount;
   @override
-  String get percent;
+  double get percent;
   @override
-  String get term;
+  int get term;
   @override
-  String get paymentType;
+  PaymentType get paymentType;
   @override
-  String get monthlyPayment;
+  double get monthlyPayment;
   @override
-  String get totalAmount;
+  double get totalAmount;
   @override
-  String get overpayment;
+  double get overpayment;
   @override
   @JsonKey(ignore: true)
   _$$CalculationImplCopyWith<_$CalculationImpl> get copyWith =>

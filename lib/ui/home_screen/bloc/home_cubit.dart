@@ -25,43 +25,43 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(term: value.trim()));
   }
 
-  void paymentType(String value) {
-    emit(state.copyWith(paymentType: value.trim()));
+  void paymentType(PaymentType value) {
+    emit(state.copyWith(paymentType: value));
   }
 
   void calculate() {
-    final _monthlyPayment = _monthlyPaymentCalculation(
+    final monthlyPayment = _monthlyPaymentCalculation(
       amount: double.parse(state.amount),
       percent: double.parse(state.percent) / 100,
       term: int.parse(state.term),
     );
 
-    final _totalAmount = _totalAmountCalculation(
-      monthlyPayment: _monthlyPayment,
+    final totalAmount = _totalAmountCalculation(
+      monthlyPayment: monthlyPayment,
       term: int.parse(state.term),
     );
 
-    final _overpayment = _overPaymentCalculation(
-      totalAmount: _totalAmount,
+    final overpayment = _overPaymentCalculation(
+      totalAmount: totalAmount,
       amount: double.parse(state.amount),
     );
 
     emit(
       state.copyWith(
-        monthlyPayment: _monthlyPayment.toStringAsFixed(2),
-        totalAmount: _totalAmount.toStringAsFixed(2),
-        overpayment: _overpayment.toStringAsFixed(2),
+        monthlyPayment: monthlyPayment.toStringAsFixed(2),
+        totalAmount: totalAmount.toStringAsFixed(2),
+        overpayment: overpayment.toStringAsFixed(2),
       ),
     );
 
     Calculation calculation = Calculation(
-      amount: state.amount,
-      percent: state.percent,
-      term: state.term,
+      amount: double.parse(state.amount),
+      percent: double.parse(state.percent),
+      term: int.parse(state.term),
       paymentType: state.paymentType,
-      monthlyPayment: state.monthlyPayment,
-      totalAmount: state.totalAmount,
-      overpayment: state.overpayment,
+      monthlyPayment: double.parse(state.monthlyPayment),
+      totalAmount: double.parse(state.totalAmount),
+      overpayment: double.parse(state.overpayment),
     );
 
     updateShared(calculation);
@@ -72,7 +72,7 @@ class HomeCubit extends Cubit<HomeState> {
     required double percent,
     required int term,
   }) {
-    if (state.paymentType == 'Аннуитетный') {
+    if (state.paymentType == PaymentType.annuity) {
       final _result = amount *
           ((percent * pow(1 + percent, term)) / (pow((1 + percent), term) - 1));
       return _result;

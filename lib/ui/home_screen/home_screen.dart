@@ -179,9 +179,11 @@ class _PaymentTypes extends StatelessWidget {
       children: [
         _paymentType(
           text: 'Аннуитетный',
+          paymentType: PaymentType.annuity,
         ),
         _paymentType(
           text: 'Дифференцированный',
+          paymentType: PaymentType.differentiated,
         ),
       ],
     );
@@ -189,20 +191,21 @@ class _PaymentTypes extends StatelessWidget {
 
   Widget _paymentType({
     required String text,
+    required PaymentType paymentType,
   }) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return InkWell(
           onTap: () {
-            context.read<HomeCubit>().paymentType(text);
+            context.read<HomeCubit>().paymentType(paymentType);
           },
           child: Row(
             children: [
               Radio(
                 value: state.paymentType,
-                groupValue: text,
+                groupValue: paymentType,
                 onChanged: (value) {
-                  context.read<HomeCubit>().paymentType(text);
+                  context.read<HomeCubit>().paymentType(paymentType);
                 },
               ),
               Flexible(
