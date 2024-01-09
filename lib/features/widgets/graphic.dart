@@ -1,5 +1,6 @@
-import 'package:calculator/data/models/calculation/calculation_model.dart';
-import 'package:calculator/ui/widgets/hat.dart';
+import 'package:calculator/core/data/models/calculation/calculation_model.dart';
+import 'package:calculator/core/data/models/calculation/payment_type_enums.dart';
+import 'package:calculator/features/widgets/hat.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -121,7 +122,7 @@ class _BarChartGraphicState extends State<BarChartGraphic> {
   List<BarChartGroupData> getData(double barsWidth, double barsSpace) {
     List<BarChartGroupData> list = [];
     for (int i = 0; i < widget.calculation.term; i++) {
-      if (widget.calculation.paymentType == 'Аннуитетный') {
+      if (widget.calculation.paymentType == PaymentType.annuity) {
         amount += amount * widget.calculation.percent / 100 -
             widget.calculation.monthlyPayment;
 

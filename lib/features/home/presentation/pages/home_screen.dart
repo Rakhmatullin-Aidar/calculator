@@ -1,12 +1,14 @@
-import 'package:calculator/data/shared_service/shared_service.dart';
-import 'package:calculator/ui/history_screen/history_screen.dart';
-import 'package:calculator/ui/home_screen/bloc/home_cubit.dart';
-import 'package:calculator/ui/widgets/textformfield.dart';
+
+import 'package:calculator/core/data/models/calculation/payment_type_enums.dart';
+import 'package:calculator/core/di/injection_container.dart';
+import 'package:calculator/features/history/presentation/pages/history_screen.dart';
+import 'package:calculator/features/home/presentation/bloc/home_cubit.dart';
+import 'package:calculator/features/home/presentation/bloc/home_state.dart';
+import 'package:calculator/features/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/home_state.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -18,10 +20,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Form(
         key: globalKey,
-        child: BlocProvider(
-          create: (context) => HomeCubit(
-            sharedService: SharedService(),
-          ),
+        child: BlocProvider<HomeCubit>(
+          create: (context) => di(),
           child: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               return Padding(
@@ -112,8 +112,9 @@ class _AmountField extends StatelessWidget {
       validator: (value) {
         final formattedValue = value!.replaceAll(',', '.').trim();
         if (formattedValue.isEmpty) return 'Обязательное поле';
-        if (double.parse(formattedValue) == 0)
+        if (double.parse(formattedValue) == 0) {
           return 'Значение должно быть больше 0';
+        }
         return null;
       },
     );
@@ -137,8 +138,9 @@ class _PercentField extends StatelessWidget {
       validator: (value) {
         final formattedValue = value!.replaceAll(',', '.').trim();
         if (formattedValue.isEmpty) return 'Обязательное поле';
-        if (double.parse(formattedValue) == 0)
+        if (double.parse(formattedValue) == 0) {
           return 'Значение должно быть больше 0';
+        }
         return null;
       },
     );
@@ -162,8 +164,9 @@ class _TermField extends StatelessWidget {
       validator: (value) {
         final formattedValue = value!.replaceAll(',', '.').trim();
         if (formattedValue.isEmpty) return 'Обязательное поле';
-        if (double.parse(formattedValue) == 0)
+        if (double.parse(formattedValue) == 0) {
           return 'Значение должно быть больше 0';
+        }
         return null;
       },
     );

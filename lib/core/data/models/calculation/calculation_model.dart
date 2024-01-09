@@ -1,4 +1,4 @@
-import 'package:calculator/ui/home_screen/bloc/home_state.dart';
+import 'package:calculator/core/data/models/calculation/payment_type_enums.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'calculation_model.freezed.dart';

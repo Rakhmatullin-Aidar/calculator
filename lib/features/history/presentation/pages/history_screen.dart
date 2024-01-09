@@ -1,9 +1,10 @@
-import 'package:calculator/data/models/calculation/calculation_model.dart';
-import 'package:calculator/data/shared_service/shared_service.dart';
-import 'package:calculator/ui/history_screen/bloc/history_cubit.dart';
-import 'package:calculator/ui/home_screen/bloc/home_state.dart';
-import 'package:calculator/ui/widgets/graphic.dart';
-import 'package:calculator/ui/widgets/hat.dart';
+
+import 'package:calculator/core/data/models/calculation/calculation_model.dart';
+import 'package:calculator/core/data/models/calculation/payment_type_enums.dart';
+import 'package:calculator/core/di/injection_container.dart';
+import 'package:calculator/features/history/presentation/bloc/history_cubit.dart';
+import 'package:calculator/features/widgets/graphic.dart';
+import 'package:calculator/features/widgets/hat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,10 +14,8 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => HistoryCubit(
-          sharedService: SharedService(),
-        )..fetchDataFromShared(),
+      body: BlocProvider<HistoryCubit>(
+        create: (context) => di()..fetchDataFromShared(),
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 24,

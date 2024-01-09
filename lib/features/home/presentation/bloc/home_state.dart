@@ -1,6 +1,5 @@
+import 'package:calculator/core/data/models/calculation/payment_type_enums.dart';
 import 'package:equatable/equatable.dart';
-
-enum PaymentType { annuity, differentiated}
 
 class HomeState extends Equatable {
   final String amount;

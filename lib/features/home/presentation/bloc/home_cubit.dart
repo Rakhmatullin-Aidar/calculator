@@ -1,16 +1,20 @@
 import 'dart:convert';
 import 'dart:math';
-
-import 'package:calculator/data/models/calculation/calculation_model.dart';
-import 'package:calculator/data/shared_service/shared_service.dart';
-import 'package:calculator/ui/home_screen/bloc/home_state.dart';
+import 'package:calculator/core/data/models/calculation/calculation_model.dart';
+import 'package:calculator/core/data/models/calculation/payment_type_enums.dart';
+import 'package:calculator/features/home/domain/usecase/get_data_from_shared_usecase.dart';
+import 'package:calculator/features/home/domain/usecase/set_data_to_shared_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'home_state.dart';
+
 class HomeCubit extends Cubit<HomeState> {
-  final SharedService sharedService;
+  final SetDataToSharedUseCase setDataToSharedUseCase;
+  final GetDataFromSharedUseCase getDataFromSharedUseCase;
 
   HomeCubit({
-    required this.sharedService,
+    required this.setDataToSharedUseCase,
+    required this.getDataFromSharedUseCase,
   }) : super(const HomeState());
 
   void amountField(String value) {
@@ -73,9 +77,9 @@ class HomeCubit extends Cubit<HomeState> {
     required int term,
   }) {
     if (state.paymentType == PaymentType.annuity) {
-      final _result = amount *
+      final result = amount *
           ((percent * pow(1 + percent, term)) / (pow((1 + percent), term) - 1));
-      return _result;
+      return result;
     } else {
       return amount / term + (amount / term * percent);
     }
@@ -95,10 +99,10 @@ class HomeCubit extends Cubit<HomeState> {
     return totalAmount - amount;
   }
 
-  void updateShared(Calculation calculation) async{
+  void updateShared(Calculation calculation) async {
     List<Calculation> list = [];
 
-    final sharedData = await sharedService.getData();
+    final sharedData = await getDataFromSharedUseCase.call();
 
     if(sharedData != null){
       list = List<Calculation>.from(sharedData.map((e) => Calculation.fromJson(jsonDecode(e)))).toList();
@@ -107,7 +111,6 @@ class HomeCubit extends Cubit<HomeState> {
     list.insert(0, calculation);
 
     final newListForShared = list.map((e) => jsonEncode(e)).toList();
-    sharedService.setData(newListForShared);
-
+    setDataToSharedUseCase.call(params: newListForShared);
   }
 }
